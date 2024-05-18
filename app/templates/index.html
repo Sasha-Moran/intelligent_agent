@@ -34,6 +34,9 @@
                         <img src="{{ file_url }}" style="width: 400px;">
                     </div>
                 {% endif %}
+                {% if context != None %}
+                    {{ context }}
+                {% endif %}
             </div>
         </div>
     </div>

@@ -4,6 +4,8 @@ from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileRequired, FileAllowed
 from wtforms import SubmitField
 
+from find_on_wiki import get_information
+
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "dbsjhsbskds"
@@ -33,9 +35,11 @@ def index():
     if form.validate_on_submit():
         filename = photos.save(form.photo.data)
         file_url = url_for("get_file", filename=filename)
+        context = get_information("Lion")
     else:
         file_url = None
-    return render_template("index.html", form=form, file_url=file_url)
+        context = None
+    return render_template("index.html", form=form, file_url=file_url, context=context)
 
 
 if __name__ == "__main__":

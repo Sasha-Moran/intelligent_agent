@@ -1,0 +1,8 @@
+tensorflow
+keras
+numpy
+matplotlib
+flask
+Flask-WTF
+Flask-Uploads
+Wikipedia-API

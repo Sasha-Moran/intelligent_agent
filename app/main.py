@@ -5,6 +5,7 @@ from flask_wtf.file import FileField, FileRequired, FileAllowed
 from wtforms import SubmitField
 
 from find_on_wiki import get_information
+from predict import predict_user_image
 
 
 app = Flask(__name__)
@@ -35,11 +36,19 @@ def index():
     if form.validate_on_submit():
         filename = photos.save(form.photo.data)
         file_url = url_for("get_file", filename=filename)
-        context = get_information("Lion")
+        name = predict_user_image(f"uploads/{filename}")
+        text, wiki_url = get_information(name)
     else:
         file_url = None
-        context = None
-    return render_template("index.html", form=form, file_url=file_url, context=context)
+        text = None
+        wiki_url = None
+        name = None
+    return render_template("index.html",
+                           form=form,
+                           file_url=file_url,
+                           context=text,
+                           wiki_url=wiki_url,
+                           name=name)
 
 
 if __name__ == "__main__":

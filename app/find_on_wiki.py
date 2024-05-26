@@ -2,10 +2,10 @@ import wikipediaapi
 
 wiki_wiki = wikipediaapi.Wikipedia("MyProjectName (merlin@example.com)", "en")
 
-def get_information(animal):
+def get_information(animal: str) -> tuple:
     page = wiki_wiki.page(animal)
 
-    return page.summary
+    return page.summary, page.fullurl
 
 
 if __name__ == "__main__":
